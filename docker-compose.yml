@@ -8,34 +8,32 @@ services:
     volumes:
       # Vhost configuration
       #- ./config/caddy/Caddyfile:/etc/caddy/Caddyfiledocker-com
-      - ./config/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
-      - ./docker/app/public:/var/www/app/public:ro
+      - ./config/nginx/in-vhost.conf:/portainer/etc/nginx/conf.d/in-vhost.conf:ro
+      - ./docker/app/public:/portainer/var/www/app/public:ro
     depends_on:
       - app
     # Run webserver nginx on port 80
     # Feel free to modify depending what port is already occupied
     ports:
-      - "80:80"
+      - "8087:80"
       #- "443:443"
     networks:
       - invoiceninja
-    extra_hosts:
-      - "in5.localhost:192.168.0.124 " #host and ip
+    container_name: invninja_server
 
   app:
     image: invoiceninja/invoiceninja:5
     env_file: env
     restart: always
     volumes:
-      - ./config/hosts:/etc/hosts:ro
-      - ./docker/app/public:/var/www/app/public:rw,delegated
-      - ./docker/app/storage:/var/www/app/storage:rw,delegated
+      - ./config/hosts:/portainer/etc/hosts:rw
+      - ./docker/app/public:/portainer/var/www/app/public:rw,delegated
+      - ./docker/app/storage:/portainer/var/www/app/storage:rw,delegated
     depends_on:
       - db
     networks:
       - invoiceninja
-    extra_hosts:
-      - "in5.localhost:192.168.0.124 " #host and ip
+    container_name: invninja_app
 
   db:
     image: mysql:8
@@ -44,12 +42,13 @@ services:
 #    For auto DB backups comment out image and use the build block below
 #    build:
 #      context: ./config/mysql
+    container_name: invninja_db
     ports:
       - "3305:3306"
     restart: always
     env_file: env
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql:rw,delegated
+      - ./docker/mysql/data:/portainer/var/lib/mysql:rw,delegated
 
       # remove comments for next 4 lines if you want auto sql backups
       #- ./docker/mysql/bak:/backups:rw
@@ -58,8 +57,6 @@ services:
       #- ./config/mysql/backup-script:/etc/cron.monthly/monthly:ro
     networks:
       - invoiceninja
-    extra_hosts:
-      - "in5.localhost:192.168.0.124 " #host and ip
 
   # THIS IS ONLY A VALID CONFIGURATION FOR IN 4. DO NOT USE FOR IN 5.
   # cron:

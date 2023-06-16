@@ -1,12 +1,13 @@
 # IN application vars
-APP_URL=http://in.localhost:8003
-APP_KEY=<insert your generated key in here>
+APP_URL=https://invoice.local
+APP_KEY=base64:d/5+LqRsaHv5Lyhm+IP5YUcoQ9ux2G2wlOEJ0exSeAs=
 APP_DEBUG=true
-REQUIRE_HTTPS=false
+MULTI_DB_ENABLED=true
+REQUIRE_HTTPS=true
 PHANTOMJS_PDF_GENERATION=false
 PDF_GENERATOR=snappdf
 TRUSTED_PROXIES='*'
-
+IS_DOCKER=true
 
 QUEUE_CONNECTION=database
 
@@ -15,29 +16,29 @@ DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=ninja
 DB_USERNAME=ninja
-DB_PASSWORD=ninja
+DB_PASSWORD=Mnsi0412
 
 # Create initial user
 # Default to these values if empty
 # IN_USER_EMAIL=admin@example.com
 # IN_PASSWORD=changeme!
-IN_USER_EMAIL=
-IN_PASSWORD=
+IN_USER_EMAIL=sachmalh@gmail.com
+IN_PASSWORD=Mnsi0412
 
 # Mail options
 MAIL_MAILER=log
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS='user@example.com'
-MAIL_FROM_NAME='Self Hosted User'
+MAIL_HOST=mail.yarvnis.ca
+MAIL_PORT=465
+MAIL_USERNAME=admin@yarvnis.ca
+MAIL_PASSWORD=M@nsi0412
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS='admin@yarvnis.ca'
+MAIL_FROM_NAME='Sachin Malhotra'
 
 # MySQL
-MYSQL_ROOT_PASSWORD=ninjaAdm1nPassword
+MYSQL_ROOT_PASSWORD=M@nsi0412
 MYSQL_USER=ninja
-MYSQL_PASSWORD=ninja
+MYSQL_PASSWORD=Mnsi0412
 MYSQL_DATABASE=ninja
 
 # V4 env vars
